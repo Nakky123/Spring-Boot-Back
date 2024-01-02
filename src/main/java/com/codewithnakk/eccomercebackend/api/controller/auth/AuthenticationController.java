@@ -7,11 +7,8 @@ import com.codewithnakk.eccomercebackend.exception.UserAlreadyExistException;
 import com.codewithnakk.eccomercebackend.model.LocalUser;
 import com.codewithnakk.eccomercebackend.service.UserService;
 import jakarta.validation.Valid;
-import org.apache.juli.logging.Log;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -54,10 +51,18 @@ public class AuthenticationController {
         }
     }
 
-    @GetMapping("/me")
-    public LocalUser getLoggedInUserProfile(@AuthenticationPrincipal LocalUser user){
-        System.out.println(user);
-        return user;
+    @GetMapping("/{email}")
+    public ResponseEntity<?> getUserDataByEmail(@PathVariable String email) {
+        // Logic to fetch user data based on the provided email
+        // This could involve calling a service method to fetch user information from the database
+
+        // Example: Fetch user by email and return it
+        LocalUser user = userService.getUserByEmail(email);
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

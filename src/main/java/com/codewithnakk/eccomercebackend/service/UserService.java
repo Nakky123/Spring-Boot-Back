@@ -51,5 +51,10 @@ public class UserService {
         return null;
     }
 
+    public LocalUser getUserByEmail(String email) {
+        Optional<LocalUser> user = localUserDAO.findByEmail(email);
+        return user.orElse(null);
+    }
+
 }
 

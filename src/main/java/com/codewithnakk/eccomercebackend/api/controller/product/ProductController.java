@@ -1,0 +1,24 @@
+package com.codewithnakk.eccomercebackend.api.controller.product;
+
+import com.codewithnakk.eccomercebackend.model.Product;
+import com.codewithnakk.eccomercebackend.service.ProductService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/product")
+public class ProductController {
+    private ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+
+    @GetMapping
+    public List<Product>  getProduct(){
+        return productService.getProduct();
+    }
+}
